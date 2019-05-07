@@ -118,6 +118,7 @@ class MainActivity : AppCompatActivity() {
                 var dbManager = DbManager(this.context!!)
                 val selectionArgs = arrayOf(myNote.noteID.toString())
                 dbManager.Delete("ID=?", selectionArgs)
+                LoadQuery("%")
 
             })
             return myView
