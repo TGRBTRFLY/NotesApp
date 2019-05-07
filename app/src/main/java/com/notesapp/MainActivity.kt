@@ -15,6 +15,10 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.ticket.view.*
 
+//
+//
+//
+
 class MainActivity : AppCompatActivity() {
 
     var listNotes = ArrayList<Note>()
@@ -24,12 +28,41 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         // Add dummy data
-        listNotes.add(Note(1, "Meet Professor", "Note Description"))
-        listNotes.add(Note(2, "Moroni 7", "47 But charity is the pure love of Christ, and it endureth forever; and whoso is found possessed of it at the last day, it shall be well with him."))
-        listNotes.add(Note(3, "Meet Doctor", "Note Description"))
+        //listNotes.add(Note(1, "Meet Professor", "Note Description"))
+        //listNotes.add(Note(2, "Moroni 7", "47 But charity is the pure love of Christ, and it endureth forever; and whoso is found possessed of it at the last day, it shall be well with him."))
+        //listNotes.add(Note(3, "Meet Doctor", "Note Description"))
+
+
+        //Load from DB
+
+        LoadQuery("%")
+
+
+    }
+
+    fun LoadQuery(title: String) {
+
+        var dbManager = DbManager(this)
+        val projections = arrayOf("ID", "Title", "Description")
+        val selectionArgs = arrayOf(title)
+        val cursor = dbManager.Query(projections, "Title like ?", selectionArgs, "Title")
+        listNotes.clear()
+        if (cursor.moveToFirst()) {
+
+            do {
+                val ID = cursor.getInt(cursor.getColumnIndex("ID"))
+                val Title = cursor.getString(cursor.getColumnIndex("Title"))
+                val Description = cursor.getString(cursor.getColumnIndex("Description"))
+
+
+                listNotes.add(Note(ID, Title, Description))
+
+
+            } while (cursor.moveToNext())
+        }
 
         var myNotesAdapter = MyNotesAdapter(listNotes)
-        notesLV.adapter = myNotesAdapter
+        lvNotes.adapter = myNotesAdapter
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -69,6 +102,7 @@ class MainActivity : AppCompatActivity() {
 
     inner class MyNotesAdapter : BaseAdapter {
         var listNotesAdapter = ArrayList<Note>()
+
         constructor(listNotesAdapter: ArrayList<Note>) : super() {
             this.listNotesAdapter = listNotesAdapter
         }

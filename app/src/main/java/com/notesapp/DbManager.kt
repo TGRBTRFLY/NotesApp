@@ -28,6 +28,7 @@ class DbManager {
         sqlDB = db.writableDatabase
     }
 
+
     inner class DatabaseHelperNotes : SQLiteOpenHelper {
         var context: Context? = null
 
