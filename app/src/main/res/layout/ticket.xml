@@ -49,22 +49,22 @@
                 android:layout_weight = "50" />
 
             <ImageButton
-                android:id = "@+id/ibEdit"
-                android:layout_width = "30dp"
-                android:layout_height = "30dp"
-                android:layout_margin = "5dp"
-                android:layout_weight = "1"
-                android:background = "#fff"
-                app:srcCompat = "@drawable/baseline_edit_black_18dp" />
+                android:id="@+id/ibDelete"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="#fff"
+                app:srcCompat="@drawable/baseline_delete_black_18dp" />
 
             <ImageButton
-                android:id = "@+id/ibDelete"
+                android:id="@+id/ibEdit"
                 android:layout_width = "30dp"
                 android:layout_height = "30dp"
                 android:layout_margin = "5dp"
                 android:layout_weight = "1"
                 android:background = "#fff"
-                app:srcCompat = "@drawable/baseline_delete_black_18dp" />
+                app:srcCompat="@drawable/baseline_edit_black_18dp" />
 
         </LinearLayout>
     </LinearLayout>

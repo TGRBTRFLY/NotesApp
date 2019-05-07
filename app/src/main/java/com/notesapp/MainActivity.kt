@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity() {
             } while (cursor.moveToNext())
         }
 
-        var myNotesAdapter = MyNotesAdapter(listNotes)
+        var myNotesAdapter = MyNotesAdapter(this, listNotes)
         lvNotes.adapter = myNotesAdapter
     }
 
@@ -102,9 +102,11 @@ class MainActivity : AppCompatActivity() {
 
     inner class MyNotesAdapter : BaseAdapter {
         var listNotesAdapter = ArrayList<Note>()
+        var context: Context? = null
 
-        constructor(listNotesAdapter: ArrayList<Note>) : super() {
+        constructor(context: Context, listNotesAdapter: ArrayList<Note>) : super() {
             this.listNotesAdapter = listNotesAdapter
+            this.context = context
         }
 
         override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
@@ -112,7 +114,12 @@ class MainActivity : AppCompatActivity() {
             var myNote = listNotesAdapter[position]
             myView.tvTitle.text = myNote.noteName
             myView.tvDes.text = myNote.noteDes
+            myView.ibDelete.setOnClickListener(View.OnClickListener {
+                var dbManager = DbManager(this.context!!)
+                val selectionArgs = arrayOf(myNote.noteID.toString())
+                dbManager.Delete("ID=?", selectionArgs)
 
+            })
             return myView
         }
 
