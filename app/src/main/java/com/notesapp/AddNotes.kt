@@ -8,7 +8,6 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_add_notes.*
 
 class AddNotes : AppCompatActivity() {
-    val dbTable = "NotesTable"
     var id = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
