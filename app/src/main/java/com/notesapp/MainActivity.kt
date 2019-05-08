@@ -40,6 +40,12 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        LoadQuery("%")
+    }
+
+
     fun LoadQuery(title: String) {
 
         var dbManager = DbManager(this)
@@ -121,6 +127,13 @@ class MainActivity : AppCompatActivity() {
                 LoadQuery("%")
 
             })
+
+            myView.ibEdit.setOnClickListener(View.OnClickListener {
+
+                GoToUpdate(myNote)
+
+
+            })
             return myView
         }
 
@@ -135,6 +148,15 @@ class MainActivity : AppCompatActivity() {
         override fun getCount(): Int {
             return listNotesAdapter.size
         }
+    }
+
+    fun GoToUpdate(note: Note) {
+        var intent = Intent(this, AddNotes::class.java)
+        intent.putExtra("ID", note.noteID)
+        intent.putExtra("name", note.noteName)
+        intent.putExtra("des", note.noteDes)
+        startActivity(intent)
+
     }
 }
 
